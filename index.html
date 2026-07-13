@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AutoRed Pro — Prototipo navegable</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="proto-banner">PROTOTIPO NAVEGABLE · Datos simulados · Sin backend, sin login, sin pagos reales</div>
+
+<header class="topbar">
+  <div class="brand">
+    <div class="brand-mark">A</div>
+    <div>
+      <div class="brand-name">AutoRed <span>Pro</span></div>
+      <div class="brand-tag">Red certificada de talleres</div>
+    </div>
+  </div>
+  <nav class="role-tabs" id="roleTabs">
+    <button class="role-tab active" data-role="cliente">👤 Cliente</button>
+    <button class="role-tab" data-role="taller">🔧 Taller</button>
+    <button class="role-tab" data-role="admin">🛡️ Administrador</button>
+  </nav>
+</header>
+
+<div class="layout">
+
+<aside class="sidenav" id="sidenav">
+  <div class="nav-group" data-role="cliente">
+    <div class="nav-title">Flujo del cliente</div>
+    <button class="nav-item active" data-screen="s1">1 · Inicio</button>
+    <button class="nav-item" data-screen="s2">2 · Mi vehículo</button>
+    <button class="nav-item" data-screen="s3">3 · Síntoma / servicio</button>
+    <button class="nav-item" data-screen="s4">4 · Talleres sugeridos</button>
+    <button class="nav-item" data-screen="s5">5 · Perfil del taller</button>
+    <button class="nav-item" data-screen="s6">6 · Solicitud de diagnóstico</button>
+    <button class="nav-item" data-screen="s7">7 · Presupuesto digital</button>
+    <button class="nav-item" data-screen="s8">8 · Autorización</button>
+    <button class="nav-item" data-screen="s9">9 · Seguimiento y evidencia</button>
+    <button class="nav-item" data-screen="s10">10 · Reporte final y garantía</button>
+  </div>
+  <div class="nav-group hidden" data-role="taller">
+    <div class="nav-title">Panel del taller</div>
+    <button class="nav-item" data-screen="s11">11 · Órdenes de trabajo</button>
+  </div>
+  <div class="nav-group hidden" data-role="admin">
+    <div class="nav-title">Panel del administrador</div>
+    <button class="nav-item" data-screen="s12">12 · Certificación de talleres</button>
+    <button class="nav-item" data-screen="s13">13 · Programa de Adecuación</button>
+    <button class="nav-item" data-screen="s14">14 · Voz del Cliente</button>
+  </div>
+</aside>
+
+<main class="content">
+
+<!-- ============ 1 · INICIO ============ -->
+<section class="screen active" id="s1">
+  <div class="hero">
+    <div class="hero-text">
+      <span class="chip chip-red">Red certificada</span>
+      <h1>Tu auto, en manos de talleres <em>certificados</em> y con evidencia de todo.</h1>
+      <p>AutoRed Pro conecta a dueños de vehículos con talleres verificados que trabajan con
+      presupuesto previo, autorización digital, evidencia en foto y video, reporte final y garantía.</p>
+      <div class="hero-actions">
+        <button class="btn btn-red" data-go="s2">Registrar mi vehículo →</button>
+        <button class="btn btn-ghost" data-go="s4">Ver talleres certificados</button>
+      </div>
+    </div>
+    <div class="hero-panel">
+      <div class="value-item"><span class="v-ico">📋</span><div><strong>Presupuesto previo</strong><small>Nada se hace sin tu autorización</small></div></div>
+      <div class="value-item"><span class="v-ico">📷</span><div><strong>Evidencia foto/video</strong><small>Antes, durante y después</small></div></div>
+      <div class="value-item"><span class="v-ico">🛡️</span><div><strong>Garantía registrada</strong><small>Por escrito y trazable</small></div></div>
+      <div class="value-item"><span class="v-ico">📖</span><div><strong>Historial del vehículo</strong><small>Todo tu expediente en un lugar</small></div></div>
+    </div>
+  </div>
+  <div class="stat-row">
+    <div class="stat"><b>24</b><span>talleres certificados</span></div>
+    <div class="stat"><b>1,280</b><span>servicios con evidencia</span></div>
+    <div class="stat"><b>4.6★</b><span>satisfacción promedio</span></div>
+    <div class="stat"><b>96%</b><span>garantías cumplidas</span></div>
+  </div>
+  <p class="sim-note">Cifras simuladas para demostración.</p>
+</section>
+
+<!-- ============ 2 · VEHÍCULO ============ -->
+<section class="screen" id="s2">
+  <h2>Registro rápido del vehículo</h2>
+  <p class="sub">Sin cuentas complicadas: tu teléfono, tu auto, y listo.</p>
+  <div class="card form-card">
+    <div class="form-grid">
+      <label>Nombre<input type="text" value="Carlos Mendoza"></label>
+      <label>Teléfono (WhatsApp)<input type="tel" value="924 123 4567"></label>
+      <label>Marca<select><option>Nissan</option><option>Volkswagen</option><option>Chevrolet</option><option>Toyota</option></select></label>
+      <label>Modelo<input type="text" value="Versa"></label>
+      <label>Año<select><option>2019</option><option>2020</option><option>2021</option></select></label>
+      <label>Kilometraje<input type="text" value="78,500 km"></label>
+      <label>Transmisión<select><option>Manual</option><option>Automática</option></select></label>
+      <label>Placa (opcional)<input type="text" value="XWA-124-B"></label>
+    </div>
+    <button class="btn btn-red" data-go="s3">Guardar y continuar →</button>
+  </div>
+  <div class="card tip-card">💡 Con tu vehículo registrado, cada servicio se suma a su <strong>historial verificable</strong>: útil para ti hoy y para venderlo mañana.</div>
+</section>
+
+<!-- ============ 3 · SÍNTOMA ============ -->
+<section class="screen" id="s3">
+  <h2>¿Qué le pasa a tu Nissan Versa 2019?</h2>
+  <p class="sub">Elige el síntoma o el servicio. No necesitas saber de mecánica.</p>
+  <div class="symptom-grid" id="symptomGrid">
+    <button class="symptom" data-sym="frenos">🛑<b>Rechina, raspa o truena al frenar</b><small>Frenos</small></button>
+    <button class="symptom" data-sym="motor">🔥<b>Se calienta el motor</b><small>Enfriamiento</small></button>
+    <button class="symptom" data-sym="suspension">〰️<b>Suena la suspensión</b><small>Suspensión</small></button>
+    <button class="symptom" data-sym="electrico">🔋<b>No enciende / batería</b><small>Eléctrico</small></button>
+    <button class="symptom" data-sym="transmision">⚙️<b>Jala o patina al cambiar</b><small>Transmisión</small></button>
+    <button class="symptom" data-sym="afinacion">🧰<b>Afinación / mantenimiento</b><small>Servicio general</small></button>
+  </div>
+  <div class="card">
+    <label class="lbl">Cuéntanos más (opcional)</label>
+    <textarea rows="2" placeholder="Ej. rechina solo en frío, del lado derecho…">Rechina al frenar, sobre todo en las mañanas. Empezó hace una semana.</textarea>
+    <div class="attach-row"><span class="attach">📷 foto_freno.jpg</span><span class="attach">🎥 video_ruido.mp4</span><button class="attach add">+ Agregar foto/video</button></div>
+  </div>
+  <button class="btn btn-red" data-go="s4" id="symContinue">Buscar talleres para frenos →</button>
+</section>
+
+<!-- ============ 4 · MATCHING ============ -->
+<section class="screen" id="s4">
+  <h2>Talleres sugeridos para <span class="accent">frenos</span></h2>
+  <p class="sub">Ordenados por certificación, especialidad, cercanía y cumplimiento.</p>
+  <div class="filter-row">
+    <span class="chip chip-navy">Especialidad: Frenos ✓</span>
+    <span class="chip">Cerca de mí</span>
+    <span class="chip">Nivel Oro</span>
+    <span class="chip">Disponible hoy</span>
+  </div>
+  <div id="workshopList" class="ws-list"><!-- render JS --></div>
+</section>
+
+<!-- ============ 5 · PERFIL DE TALLER ============ -->
+<section class="screen" id="s5">
+  <div class="ws-hero">
+    <div class="ws-photo">🏭</div>
+    <div>
+      <div class="badge-row"><span class="badge badge-gold">★ CERTIFICADO ORO</span><span class="badge badge-spec">Especialista en frenos</span></div>
+      <h2>Taller Hermanos Ruiz</h2>
+      <p class="sub">Av. Hidalgo 214, Centro · a 1.2 km · Abierto hasta las 19:00</p>
+      <div class="ws-stats">
+        <span>⭐ 4.8 (156 reseñas)</span><span>📷 98% evidencia completa</span><span>🛡️ 100% garantías cumplidas</span><span>⏱️ Responde en ~15 min</span>
+      </div>
+    </div>
+  </div>
+  <div class="two-col">
+    <div class="card">
+      <h3>Cumplimiento verificado</h3>
+      <ul class="check-list">
+        <li>✅ Auditoría vigente <small>(mayo 2026)</small></li>
+        <li>✅ Presupuesto previo obligatorio</li>
+        <li>✅ Evidencia foto/video en cada servicio</li>
+        <li>✅ Área de espera y sanitario para clientes</li>
+        <li>✅ Técnicos capacitados: frenos y suspensión</li>
+        <li>✅ Manejo responsable de residuos</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Reseñas recientes</h3>
+      <div class="review"><b>María G. ⭐⭐⭐⭐⭐</b><p>"Me mandaron fotos de las balatas antes de cambiarlas. Nunca me habían explicado así."</p></div>
+      <div class="review"><b>Jorge T. ⭐⭐⭐⭐⭐</b><p>"Autorizé todo desde el teléfono. Cero sorpresas en el precio."</p></div>
+      <div class="review"><b>Lucía P. ⭐⭐⭐⭐</b><p>"Buen trabajo y garantía por escrito. La espera fue cómoda."</p></div>
+    </div>
+  </div>
+  <button class="btn btn-red btn-lg" data-go="s6">Solicitar diagnóstico aquí →</button>
+</section>
+
+<!-- ============ 6 · SOLICITUD ============ -->
+<section class="screen" id="s6">
+  <h2>Solicitud de diagnóstico</h2>
+  <p class="sub">Taller Hermanos Ruiz revisará tu vehículo y te enviará un presupuesto <strong>antes de tocar nada</strong>.
+  Ningún trabajo se realiza sin presupuesto y autorización del cliente.</p>
+  <div class="two-col">
+    <div class="card">
+      <h3>Resumen de tu solicitud</h3>
+      <table class="kv">
+        <tr><td>Vehículo</td><td>Nissan Versa 2019 · 78,500 km</td></tr>
+        <tr><td>Síntoma</td><td>Rechina, raspa o truena al frenar (frenos)</td></tr>
+        <tr><td>Descripción</td><td>Rechina en las mañanas, desde hace una semana</td></tr>
+        <tr><td>Adjuntos</td><td>1 foto · 1 video</td></tr>
+        <tr><td>Taller</td><td>Hermanos Ruiz · Certificado Oro</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h3>¿Cuándo lo llevas?</h3>
+      <div class="slot-row">
+        <button class="slot">Hoy 16:30</button>
+        <button class="slot active">Mañana 9:00</button>
+        <button class="slot">Mañana 11:30</button>
+        <button class="slot">Jue 10:00</button>
+      </div>
+      <label class="lbl">Modalidad</label>
+      <div class="slot-row">
+        <button class="slot active">🚗 Yo lo llevo</button>
+        <button class="slot">📅 Con cita</button>
+      </div>
+      <div class="notice">ℹ️ El diagnóstico tiene costo de <b>$250</b> que se <b>bonifica</b> si autorizas la reparación.</div>
+    </div>
+  </div>
+  <button class="btn btn-red btn-lg" data-go="s7" id="sendRequest">Enviar solicitud ✓</button>
+</section>
+
+<!-- ============ 7 · PRESUPUESTO ============ -->
+<section class="screen" id="s7">
+  <div class="flow-note">📩 <b>Hermanos Ruiz</b> documentó la recepción (4 fotos) y diagnosticó tu vehículo. Te envió este presupuesto:</div>
+  <h2>Presupuesto digital <span class="folio">FOLIO PR-2026-0341</span></h2>
+  <p class="sub">Marca lo que autorizas. Puedes aprobar todo o solo una parte.</p>
+  <div class="card quote-card">
+    <div class="q-head"><span>Concepto</span><span>Detalle</span><span>Importe</span><span>Autorizo</span></div>
+    <div id="quoteItems"><!-- render JS --></div>
+    <div class="q-total"><span>Total autorizado</span><b id="quoteTotal">$2,890</b></div>
+    <div class="q-meta">Vigencia: 5 días · Garantía: 6 meses / 10,000 km en partes y mano de obra · Diagnóstico ($250) bonificado</div>
+  </div>
+  <div class="evidence-strip">
+    <div class="ev ev-a">📷<small>Recepción</small></div>
+    <div class="ev ev-b">📷<small>Balata desgastada</small></div>
+    <div class="ev ev-c">🎥<small>Ruido al girar disco</small></div>
+    <div class="ev ev-d">📷<small>Disco rayado</small></div>
+  </div>
+  <button class="btn btn-red btn-lg" data-go="s8">Continuar a autorización →</button>
+</section>
+
+<!-- ============ 8 · AUTORIZACIÓN ============ -->
+<section class="screen" id="s8">
+  <h2>Autorización del cliente</h2>
+  <p class="sub">Tu autorización queda registrada con fecha, hora y folio.</p>
+  <div class="rule-banner">🔒 Regla central de confianza: <b>el taller no puede ejecutar nada que no esté autorizado aquí.</b></div>
+  <div class="card auth-card">
+    <table class="kv">
+      <tr><td>Presupuesto</td><td>PR-2026-0341 · Taller Hermanos Ruiz</td></tr>
+      <tr><td>Partidas autorizadas</td><td id="authItems">3 de 4 (rectificado de discos: NO autorizado)</td></tr>
+      <tr><td>Total a pagar</td><td><b id="authTotal">$2,890</b> (pago al entregar: efectivo o transferencia)</td></tr>
+      <tr><td>Garantía</td><td>6 meses / 10,000 km</td></tr>
+    </table>
+    <label class="agree"><input type="checkbox" id="agreeChk" checked> Entiendo y autorizo únicamente los trabajos marcados. Todo trabajo adicional requerirá una nueva autorización.</label>
+    <div class="sign-zone" id="signZone"><span id="signText">✍️ Toca aquí para firmar (simulado)</span></div>
+    <button class="btn btn-red btn-lg" id="authorizeBtn" data-go="s9">AUTORIZAR TRABAJOS ✓</button>
+  </div>
+</section>
+
+<!-- ============ 9 · SEGUIMIENTO ============ -->
+<section class="screen" id="s9">
+  <h2>Seguimiento del servicio <span class="folio">ORDEN OT-2026-0512</span></h2>
+  <p class="sub">Nissan Versa 2019 · Taller Hermanos Ruiz · Entrega estimada: <b>hoy 17:00</b></p>
+  <div class="timeline">
+    <div class="t-step done"><div class="t-dot">✓</div><div><b>Recepción documentada</b><small>9:04 · 4 fotos del estado del vehículo</small><div class="mini-ev"><span>📷</span><span>📷</span><span>📷</span><span>📷</span></div></div></div>
+    <div class="t-step done"><div class="t-dot">✓</div><div><b>Diagnóstico</b><small>9:40 · Balatas al 10%, disco delantero rayado</small><div class="mini-ev"><span>📷</span><span>🎥</span></div></div></div>
+    <div class="t-step done"><div class="t-dot">✓</div><div><b>Presupuesto autorizado</b><small>10:12 · 3 partidas · $2,890 · firma registrada</small></div></div>
+    <div class="t-step active"><div class="t-dot">🔧</div><div><b>En proceso: cambio de balatas</b><small>Ahora · refacción original, número de parte fotografiado</small><div class="mini-ev"><span>📷</span><span>📷</span></div></div></div>
+    <div class="t-step"><div class="t-dot">4</div><div><b>Pruebas y control de calidad</b><small>Pendiente</small></div></div>
+    <div class="t-step"><div class="t-dot">5</div><div><b>Reporte final y entrega</b><small>Pendiente</small></div></div>
+  </div>
+  <div class="notice">🔔 Si el taller encuentra algo adicional, recibirás un <b>nuevo presupuesto</b>: nada se hace sin tu autorización.</div>
+  <button class="btn btn-red" data-go="s10">Ver reporte final (simular avance) →</button>
+</section>
+
+<!-- ============ 10 · REPORTE FINAL ============ -->
+<section class="screen" id="s10">
+  <div class="done-banner">✅ Servicio terminado · Vehículo entregado</div>
+  <h2>Reporte final y garantía</h2>
+  <div class="two-col">
+    <div class="card">
+      <h3>Reporte del servicio · OT-2026-0512</h3>
+      <table class="kv">
+        <tr><td>Trabajos</td><td>Cambio de balatas delanteras · limpieza y ajuste · líquido de frenos</td></tr>
+        <tr><td>Refacciones</td><td>Balatas cerámica (orig.) — parte #D1060-4M</td></tr>
+        <tr><td>Técnico</td><td>José Ruiz · Certificado en frenos</td></tr>
+        <tr><td>Recomendación</td><td>Revisar discos en 5,000 km (rectificado no autorizado hoy)</td></tr>
+        <tr><td>Total pagado</td><td><b>$2,890</b> · efectivo · recibo folio R-1188</td></tr>
+      </table>
+      <h3 style="margin-top:14px">Evidencia antes / después</h3>
+      <div class="ba-row">
+        <div class="ba before">📷<b>ANTES</b><small>Balata al 10%</small></div>
+        <div class="ba after">📷<b>DESPUÉS</b><small>Balata nueva instalada</small></div>
+        <div class="ba before">🎥<b>ANTES</b><small>Rechinido audible</small></div>
+        <div class="ba after">🎥<b>DESPUÉS</b><small>Frenado silencioso</small></div>
+      </div>
+    </div>
+    <div>
+      <div class="card warranty-card">
+        <h3>🛡️ Garantía registrada</h3>
+        <div class="w-big">6 meses <span>o</span> 10,000 km</div>
+        <p>Cubre mano de obra y refacciones del trabajo autorizado. Válida en cualquier taller de la red AutoRed Pro.</p>
+        <div class="w-folio">Certificado G-2026-0512 · vigente hasta 13/ene/2027</div>
+      </div>
+      <div class="card">
+        <h3>📖 Historial del vehículo</h3>
+        <div class="hist-item"><b>Hoy</b> Frenos delanteros · Hermanos Ruiz · $2,890 · 🛡️</div>
+        <div class="hist-item"><b>Mar 2026</b> Afinación mayor · Taller García · $1,850 · 🛡️</div>
+        <div class="hist-item"><b>Nov 2025</b> Suspensión del. · MecaExpress · $3,200 · 🛡️</div>
+        <small class="sim-note">Expediente portable: útil para reventa y seguros.</small>
+      </div>
+      <div class="card nps-mini">
+        <h3>¿Cómo quedó todo?</h3>
+        <p>Ayúdanos con 6 preguntas rápidas (1 minuto).</p>
+        <button class="btn btn-navy" data-role-go="admin" data-go="s14">Responder evaluación →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 11 · PANEL TALLER ============ -->
+<section class="screen" id="s11">
+  <div class="panel-head">
+    <div><h2>Panel del taller — Hermanos Ruiz</h2><p class="sub">Martes 13 · 6 órdenes activas · <span class="badge badge-gold">★ ORO</span></p></div>
+    <div class="panel-kpis">
+      <div class="kpi"><b>98%</b><span>evidencia completa</span></div>
+      <div class="kpi"><b>4.8★</b><span>calificación</span></div>
+      <div class="kpi"><b>15 min</b><span>resp. promedio</span></div>
+    </div>
+  </div>
+  <div class="kanban">
+    <div class="kcol">
+      <div class="kcol-head k-blue">📥 Recibidos (2)</div>
+      <div class="kcard"><b>OT-0514 · Tsuru 2014</b><small>No enciende · recepción pendiente de fotos</small><span class="ktag warn">⚠ Documentar recepción</span></div>
+      <div class="kcard"><b>OT-0515 · Aveo 2020</b><small>Afinación · cita 12:30</small><span class="ktag">Esperando unidad</span></div>
+    </div>
+    <div class="kcol">
+      <div class="kcol-head k-amber">📋 Por autorizar (1)</div>
+      <div class="kcard"><b>OT-0513 · Jetta 2018</b><small>Suspensión · presupuesto enviado 10:40</small><span class="ktag">⏱ Cliente revisando</span></div>
+    </div>
+    <div class="kcol">
+      <div class="kcol-head k-red">🔧 En proceso (2)</div>
+      <div class="kcard hl"><b>OT-0512 · Versa 2019</b><small>Frenos · balatas instaladas</small><span class="ktag ok">📷 2/3 evidencias subidas</span><button class="btn btn-mini">+ Subir evidencia</button></div>
+      <div class="kcard"><b>OT-0509 · March 2017</b><small>Clutch · esperando refacción</small><span class="ktag warn">⚠ Avisar demora al cliente</span></div>
+    </div>
+    <div class="kcol">
+      <div class="kcol-head k-green">✅ Por entregar (1)</div>
+      <div class="kcard"><b>OT-0508 · Sentra 2021</b><small>Frenos tras. · reporte final listo</small><span class="ktag ok">🛡️ Garantía generada</span></div>
+    </div>
+  </div>
+  <div class="rule-banner">📌 Regla operativa de la red: <b>una orden no puede pasar a "En proceso" sin presupuesto autorizado, ni cerrarse sin reporte final con evidencia.</b></div>
+</section>
+
+<!-- ============ 12 · PANEL ADMIN ============ -->
+<section class="screen" id="s12">
+  <h2>Administración de la red — Certificación</h2>
+  <p class="sub">Talleres de la zona piloto · corte al 13 de julio</p>
+  <div class="notice">🛡️ Los talleres <b>en proceso</b> o <b>en adecuación</b> no aparecen al cliente hasta cumplir los mínimos operativos de la red: la red protege la calidad antes de dar visibilidad.</div>
+  <div class="stat-row">
+    <div class="stat"><b>24</b><span>certificados activos</span></div>
+    <div class="stat"><b>7</b><span>en proceso (provisional)</span></div>
+    <div class="stat"><b>11</b><span>en adecuación</span></div>
+    <div class="stat"><b>2</b><span>suspendidos</span></div>
+  </div>
+  <div class="card">
+    <table class="admin-table">
+      <thead><tr><th>Taller</th><th>Nivel</th><th>Score auditoría</th><th>Evidencia</th><th>Quejas/10</th><th>Próxima auditoría</th><th>Estado</th></tr></thead>
+      <tbody>
+        <tr><td><b>Hermanos Ruiz</b></td><td><span class="badge badge-gold">ORO</span></td><td>94</td><td>98%</td><td>0.3</td><td>Oct 2026</td><td><span class="pill ok">Activo</span></td></tr>
+        <tr><td><b>Frenos y Clutch García</b></td><td><span class="badge badge-silver">PLATA</span></td><td>86</td><td>93%</td><td>0.6</td><td>Sep 2026</td><td><span class="pill ok">Activo</span></td></tr>
+        <tr><td><b>MecaExpress</b></td><td><span class="badge badge-bronze">BRONCE</span></td><td>78</td><td>88%</td><td>1.1</td><td>Ago 2026</td><td><span class="pill warn">Plan de mejora</span></td></tr>
+        <tr><td><b>Servicio El Compa</b></td><td><span class="badge badge-proc">EN PROCESO</span></td><td>— (semáforo 🟡)</td><td>71%</td><td>—</td><td>Pend. etapa 3</td><td><span class="pill proc">Provisional</span></td></tr>
+        <tr><td><b>Taller Rápido Sur</b></td><td><span class="badge badge-none">—</span></td><td>— (semáforo 🔴)</td><td>—</td><td>—</td><td>—</td><td><span class="pill bad">En adecuación</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="two-col">
+    <div class="card"><h3>⚠️ Alertas de cumplimiento</h3>
+      <div class="alert-item">MecaExpress: evidencia completa bajó de 90% → plan de mejora activado (corte: 15 días)</div>
+      <div class="alert-item">Servicio El Compa: estatus provisional vence en 22 días · etapa 3 sin validar</div>
+      <div class="alert-item bad">AutoServicio Norte: 2ª queja grave verificada → propuesta de suspensión (revisar caso)</div>
+    </div>
+    <div class="card"><h3>📅 Agenda del certificador</h3>
+      <div class="alert-item">Mié 15 · Auditoría inicial — Taller Independencia (solicitud nueva)</div>
+      <div class="alert-item">Jue 16 · Validación etapa 2 — Servicio El Compa (fotos antes/después)</div>
+      <div class="alert-item">Vie 17 · Pre-evaluación gratuita — 2 talleres interesados (col. Centro)</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 13 · ADECUACIÓN ============ -->
+<section class="screen" id="s13">
+  <h2>Programa de Adecuación de Talleres</h2>
+  <p class="sub">Del taller común al taller certificado: semáforo, plan por etapas y avance 30/60/90.</p>
+  <div class="sem-row">
+    <div class="sem sem-green"><div class="sem-dot"></div><b>Verde · 4</b><small>Listos para auditoría formal</small></div>
+    <div class="sem sem-yellow"><div class="sem-dot"></div><b>Amarillo · 7</b><small>"En proceso de certificación" con plan activo</small></div>
+    <div class="sem sem-red"><div class="sem-dot"></div><b>Rojo · 4</b><small>Requieren adecuación antes de operar</small></div>
+  </div>
+  <div class="card">
+    <div class="adq-head">
+      <div><h3>Servicio El Compa <span class="badge badge-proc">EN PROCESO 🟡</span></h3>
+      <small>Pre-evaluado: 12/jun · Paquete Intermedio · Asesor: L. Medina</small></div>
+      <div class="prog-wrap"><div class="prog"><div class="prog-fill" style="width:55%"></div></div><small><b>55%</b> de avance del plan</small></div>
+    </div>
+    <div class="stages">
+      <div class="stage done"><b>Etapa 1</b><span>Orden operativo básico</span><small>✅ Validada · corte 30 días</small></div>
+      <div class="stage done"><b>Etapa 2</b><span>Imagen y confianza</span><small>✅ Validada · fotos antes/después</small></div>
+      <div class="stage active"><b>Etapa 3</b><span>Proceso digital</span><small>🔧 En curso · corte 60 días: 16/jul</small></div>
+      <div class="stage"><b>Etapa 4</b><span>Herramienta y equipo</span><small>Pendiente</small></div>
+      <div class="stage"><b>Etapa 5</b><span>Capacitación y certificación</span><small>Pendiente · meta 90 días</small></div>
+    </div>
+    <div class="ba-row">
+      <div class="ba before">📷<b>ANTES</b><small>Área de espera (jun)</small></div>
+      <div class="ba after">📷<b>DESPUÉS</b><small>Área de espera (jul)</small></div>
+      <div class="ba before">📷<b>ANTES</b><small>Bahía 1 sin delimitar</small></div>
+      <div class="ba after">📷<b>DESPUÉS</b><small>Bahía 1 señalizada</small></div>
+    </div>
+  </div>
+  <div class="two-col">
+    <div class="card"><h3>Brechas pendientes (diagnóstico)</h3>
+      <ul class="gap-list">
+        <li><span class="pill warn">Etapa 3</span> Adoptar presupuesto digital en el 100% de los servicios (hoy: 60%)</li>
+        <li><span class="pill warn">Etapa 4</span> Scanner OBD propio (hoy renta por evento)</li>
+        <li><span class="pill">Etapa 5</span> Curso de frenos certificado para 2 técnicos</li>
+      </ul>
+    </div>
+    <div class="card pitch-card">
+      <div class="pitch-kicker">El mensaje al taller</div>
+      <p class="pitch-phrase">"No necesitas tener el taller perfecto para empezar; <em>necesitas un plan claro para llegar al estándar</em>."</p>
+      <div class="pitch-notes">Pre-evaluación gratuita · el taller puede mejorar por su cuenta o con proveedores aliados · la certificación se gana cumpliendo el estándar, nunca comprando paquetes.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 14 · VOZ DEL CLIENTE ============ -->
+<section class="screen" id="s14">
+  <h2>Voz del Cliente</h2>
+  <p class="sub">Quejas, sugerencias, NPS y percepción calidad-precio de la red · últimos 30 días</p>
+  <div class="stat-row">
+    <div class="stat"><b>0.7</b><span>quejas por 10 servicios</span></div>
+    <div class="stat"><b>6 h</b><span>respuesta promedio</span></div>
+    <div class="stat"><b>+42</b><span>NPS de la red</span></div>
+    <div class="stat"><b>4.3/5</b><span>calidad-precio</span></div>
+  </div>
+  <div class="two-col">
+    <div class="card">
+      <h3>Bandeja de entrada</h3>
+      <div class="fb-item"><span class="pill bad">QUEJA</span><div><b>OT-0498 · MecaExpress</b><p>"Me entregaron 2 horas tarde y nadie avisó."</p><small>Estado: respuesta del taller (SLA 24 h) · abierta hace 5 h</small></div></div>
+      <div class="fb-item"><span class="pill risk">RIESGO</span><div><b>OT-0471 · AutoServicio Norte</b><p>"Me cobraron un cambio de bujías que nunca autoricé."</p><small>⚡ Escalada al administrador · caso #C-118 · en revisión</small></div></div>
+      <div class="fb-item"><span class="pill sug">SUGERENCIA</span><div><b>App · cliente frecuente</b><p>"Estaría bien poder agendar desde el historial del carro."</p><small>Enviada a backlog de producto</small></div></div>
+      <div class="fb-item"><span class="pill fel">FELICITACIÓN</span><div><b>OT-0512 · Hermanos Ruiz</b><p>"Primera vez que un taller me manda video del problema. Excelente."</p><small>Compartida con el taller ✓</small></div></div>
+    </div>
+    <div>
+      <div class="card">
+        <h3>Encuesta post-servicio (vista del cliente)</h3>
+        <div class="q-block"><label class="lbl">¿El presupuesto coincidió con lo autorizado?</label>
+          <div class="slot-row"><button class="slot active">Sí</button><button class="slot">Cambios explicados</button><button class="slot">Cambios sin explicar</button></div></div>
+        <div class="q-block"><label class="lbl">Relación calidad-precio</label>
+          <div class="slot-row stars" id="cpStars"><button class="slot">1</button><button class="slot">2</button><button class="slot">3</button><button class="slot active">4</button><button class="slot">5</button></div></div>
+        <div class="q-block"><label class="lbl">Del 0 al 10, ¿recomendarías este taller?</label>
+          <div class="nps-row" id="npsRow"></div>
+          <small id="npsLabel" class="nps-label">9 · Promotor 🎉</small></div>
+        <button class="btn btn-navy" id="sendSurvey">Enviar evaluación ✓</button>
+      </div>
+      <div class="card">
+        <h3>Flujo de atención de quejas</h3>
+        <div class="flow-chain"><span>Recibida</span>→<span>Revisión</span>→<span>Respuesta del taller</span>→<span>Solución</span>→<span>Cierre</span>→<span class="hl">Aprendizaje</span></div>
+        <small><b>Esto no es un buzón:</b> cada queja genera revisión, respuesta, solución y aprendizaje para mejorar la red — en el taller, en el proceso o en el checklist de auditoría.</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+</div>
+
+<footer class="foot">AutoRed Pro · Prototipo demostrativo · Datos simulados · No representa una operación comercial activa.</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
