@@ -114,7 +114,7 @@ small{color:var(--gray-6)}
 .tip-card{background:#eef3f9;border:none;font-size:.88rem}
 
 /* ---------- 3 · síntomas ---------- */
-.symptom-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
+.symptom-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
 .symptom{background:var(--white);border:2px solid var(--gray-2);border-radius:var(--radius);padding:18px 12px;text-align:center;font-size:1.6rem;transition:.15s}
 .symptom b{display:block;font-size:.88rem;color:var(--navy);margin-top:6px}
 .symptom small{display:block;font-size:.7rem;color:var(--gray-4);text-transform:uppercase;letter-spacing:.5px}
@@ -286,6 +286,62 @@ small{color:var(--gray-6)}
 .flow-chain span.hl{background:var(--navy);color:#fff;border-color:var(--navy)}
 .stars .slot{width:42px;text-align:center}
 
+/* ---------- disclaimers ---------- */
+.disclaim{font-size:.74rem;color:var(--gray-6);font-style:italic;margin:6px 0}
+
+/* ---------- bitácora de trazabilidad ---------- */
+.trace-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.trace-log{max-height:420px;overflow-y:auto;margin-top:10px;border-top:1px solid var(--gray-2)}
+.tr-ev{display:flex;gap:12px;padding:10px 4px;border-bottom:1px solid var(--gray-1);font-size:.82rem}
+.tr-ev.tr-auth{background:#fdf6ef}
+.tr-when{min-width:92px;font-size:.7rem;color:var(--gray-4);font-weight:700;padding-top:2px}
+.tr-body{flex:1}
+.tr-top b{color:var(--navy)}
+.tr-actor{font-size:.68rem;background:var(--gray-2);color:var(--gray-6);padding:2px 8px;border-radius:99px;font-weight:700;margin-left:6px}
+.tr-desc{color:var(--gray-6);margin:2px 0}
+.tr-meta{font-size:.7rem;color:var(--gray-4)}
+.tr-meta code{background:var(--gray-1);padding:1px 6px;border-radius:4px;color:var(--navy-3)}
+.tr-obs{font-size:.74rem;color:var(--red);margin-top:3px;font-weight:600}
+
+/* ---------- islas de trabajo ---------- */
+.islands-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
+.island{background:var(--white);border:1px solid var(--gray-2);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
+.is-head{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 12px;background:var(--navy);color:#fff;font-size:.82rem}
+.is-state{font-size:.64rem;font-weight:800;letter-spacing:.5px;padding:3px 9px;border-radius:99px;background:rgba(255,255,255,.15);white-space:nowrap}
+.ist-free .is-head{background:var(--green)}
+.ist-busy .is-head{background:var(--red)}
+.ist-block .is-head{background:var(--amber)}
+.ist-test .is-head{background:var(--navy-3)}
+.ist-done .is-head{background:#1b5e20}
+.ist-res .is-head{background:var(--gray-6)}
+.ist-off .is-head{background:var(--gray-9)}
+.is-body{padding:10px 12px;font-size:.78rem;flex:1}
+.is-row{padding:3px 0;color:var(--gray-6)}
+.is-row b{color:var(--navy)}
+.is-flag{margin-top:6px;font-size:.72rem;font-weight:700;padding:5px 9px;border-radius:6px}
+.is-flag.warn{background:#fdeedd;color:var(--amber)}
+.is-flag.block{background:#fdeaea;color:var(--red)}
+.is-actions{display:flex;gap:6px;flex-wrap:wrap;padding:10px 12px;border-top:1px solid var(--gray-1);background:var(--gray-1)}
+.is-actions select{font-size:.72rem;padding:5px 6px;border:1.5px solid var(--gray-2);border-radius:6px;background:var(--white);color:var(--gray-9);max-width:150px}
+.btn-mini.ok{background:var(--green)}
+.btn-mini.bad{background:var(--red)}
+
+/* ---------- acceso demostrativo ---------- */
+.role-tab.logout{border-color:transparent;color:#ff8a80;font-weight:700}
+.login-overlay{position:fixed;inset:0;background:rgba(18,38,63,.75);display:flex;align-items:center;justify-content:center;z-index:50;padding:16px}
+.login-box{background:var(--white);border-radius:14px;padding:26px;max-width:400px;width:100%;box-shadow:0 12px 40px rgba(0,0,0,.35)}
+.login-head{font-size:1.15rem;font-weight:800;color:var(--navy);margin-bottom:8px}
+.login-sub{font-size:.85rem;color:var(--gray-6);margin-bottom:14px}
+.login-box input{width:100%;padding:11px 12px;border:1.5px solid var(--gray-2);border-radius:7px;font-size:.95rem;font-family:inherit;margin-top:4px;background:var(--white);color:var(--gray-9)}
+.login-box input:focus{outline:none;border-color:var(--navy-3)}
+.pw-wrap{position:relative}
+.pw-wrap input{padding-right:44px}
+.pw-wrap button{position:absolute;right:6px;top:50%;transform:translateY(-42%);background:none;border:none;font-size:1.1rem;color:var(--gray-6)}
+.login-error{background:#fdeaea;color:var(--red);font-size:.8rem;font-weight:700;padding:8px 12px;border-radius:7px;margin-top:10px}
+.login-submit{width:100%;margin-top:14px}
+.login-cancel{width:100%;margin-top:8px}
+.login-legend{font-size:.68rem;color:var(--gray-4);text-align:center;margin-top:14px;border-top:1px solid var(--gray-1);padding-top:10px}
+
 /* ---------- responsive ---------- */
 @media (max-width:900px){
   .layout{flex-direction:column}
@@ -299,6 +355,7 @@ small{color:var(--gray-6)}
   .kanban{grid-template-columns:1fr 1fr}
   .stages{grid-template-columns:1fr 1fr}
   .symptom-grid{grid-template-columns:1fr 1fr}
+  .islands-grid{grid-template-columns:1fr}
   .form-grid{grid-template-columns:1fr}
   .sem-row{grid-template-columns:1fr}
   .ws-card{grid-template-columns:44px 1fr}
