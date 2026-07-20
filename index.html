@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AutoRed Pro — Prototipo navegable</title>
 <link rel="stylesheet" href="styles.css">
+<link rel="icon" type="image/png" href="brand/favicon.png">
+<link rel="apple-touch-icon" href="brand/apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#12263f">
 </head>
 <body>
 
@@ -12,7 +16,9 @@
 
 <header class="topbar">
   <div class="brand">
-    <div class="brand-mark">A</div>
+    <img class="brand-logo" src="brand/logo-icon-192.png" alt="AutoRed Pro"
+         onerror="this.classList.add('hidden');this.nextElementSibling.classList.remove('hidden')">
+    <div class="brand-mark hidden">A</div>
     <div>
       <div class="brand-name">AutoRed <span>Pro</span></div>
       <div class="brand-tag">Red certificada de talleres</div>
@@ -41,17 +47,20 @@
     <button class="nav-item" data-screen="s8">8 · Autorización</button>
     <button class="nav-item" data-screen="s9">9 · Seguimiento y evidencia</button>
     <button class="nav-item" data-screen="s10">10 · Reporte final y garantía</button>
+    <button class="nav-item" data-screen="s16">11 · Expediente del vehículo</button>
   </div>
   <div class="nav-group hidden" data-role="taller">
     <div class="nav-title">Panel del taller</div>
-    <button class="nav-item" data-screen="s11">11 · Órdenes de trabajo</button>
-    <button class="nav-item" data-screen="s15">12 · Islas de trabajo</button>
+    <button class="nav-item" data-screen="s11">12 · Órdenes de trabajo</button>
+    <button class="nav-item" data-screen="s15">13 · Islas de trabajo</button>
+    <button class="nav-item" data-screen="s17">14 · Control de integridad</button>
   </div>
   <div class="nav-group hidden" data-role="admin">
     <div class="nav-title">Panel del administrador</div>
-    <button class="nav-item" data-screen="s12">13 · Certificación de talleres</button>
-    <button class="nav-item" data-screen="s13">14 · Programa de Adecuación</button>
-    <button class="nav-item" data-screen="s14">15 · Voz del Cliente</button>
+    <button class="nav-item" data-screen="s12">15 · Certificación de talleres</button>
+    <button class="nav-item" data-screen="s13">16 · Programa de Adecuación</button>
+    <button class="nav-item" data-screen="s14">17 · Voz del Cliente</button>
+    <button class="nav-item" data-screen="s18">18 · Catálogo de vehículos</button>
   </div>
 </aside>
 
@@ -61,6 +70,8 @@
 <section class="screen active" id="s1">
   <div class="hero">
     <div class="hero-text">
+      <img class="hero-logo" src="brand/logo-horizontal-plate.png" alt="AutoRed Pro"
+           onerror="this.classList.add('hidden')">
       <span class="chip chip-red">Red certificada</span>
       <h1>Tu auto, en manos de talleres <em>certificados</em> y con evidencia de todo.</h1>
       <p>AutoRed Pro conecta a dueños de vehículos con talleres verificados que trabajan con
@@ -94,14 +105,30 @@
     <div class="form-grid">
       <label>Nombre<input type="text" value="Carlos Mendoza"></label>
       <label>Teléfono (WhatsApp)<input type="tel" value="924 123 4567"></label>
-      <label>Vehículo
-        <select id="vehicleSelect"></select>
+      <label style="grid-column:1/-1">Vehículo — escribe marca o modelo
+        <div class="veh-wrap">
+          <input type="text" id="vehSearch" autocomplete="off" placeholder="Ej. versa, tsuru, vocho, np300, aveo…">
+          <div class="veh-suggest hidden" id="vehSuggest"></div>
+        </div>
       </label>
+      <div style="grid-column:1/-1" id="vehPicked"></div>
       <label>Kilometraje<input type="text" id="vehKm" value=""></label>
       <label>Transmisión<select><option>Manual</option><option>Automática</option></select></label>
       <label>Placa (opcional)<input type="text" value="XWA-124-B"></label>
     </div>
     <button class="btn btn-red" data-go="s3">Guardar y continuar →</button>
+  </div>
+  <div class="card hidden" id="vehManualCard">
+    <h3>Captura manual de vehículo</h3>
+    <p class="disclaim">No bloquea el servicio: se guarda como <b>"Captura manual pendiente de normalizar"</b> y el administrador la revisa para sumarla al catálogo.</p>
+    <div class="form-grid">
+      <label>Marca<input type="text" id="vmMarca" placeholder="Ej. Peugeot"></label>
+      <label>Modelo<input type="text" id="vmModelo" placeholder="Ej. 301"></label>
+      <label>Año<input type="text" id="vmAnio" placeholder="Ej. 2016"></label>
+      <label>Versión (si la conoce)<input type="text" id="vmVersion" placeholder="Opcional"></label>
+      <label>Motor (si lo conoce)<input type="text" id="vmMotor" placeholder="Opcional"></label>
+    </div>
+    <button class="btn btn-navy" id="vmSave">Guardar captura manual ✓</button>
   </div>
   <div class="card tip-card">💡 Con tu vehículo registrado, cada servicio se suma a su <strong>historial verificable</strong>: útil para ti hoy y para venderlo mañana. La selección se conserva durante todo el flujo.</div>
 </section>
@@ -196,7 +223,47 @@
       <div class="notice" id="diagNote"></div>
     </div>
   </div>
+  <div class="card ext-card">
+    <h3>Intervenciones externas (obligatorio en recepción)</h3>
+    <p class="ext-q">"¿Desde el último servicio registrado el vehículo recibió alguna revisión, reparación,
+    modificación o mantenimiento <b>fuera de AutoRed Pro</b>?"</p>
+    <div class="slot-row" id="extOptions"></div>
+    <p class="disclaim" id="extAskHint"></p>
+    <div id="extForm" class="hidden">
+      <div class="form-grid ext-grid">
+        <label>Precisión de la fecha<select id="extFechaPrec">
+          <option>Fecha exacta</option><option selected>Fecha aproximada</option>
+          <option>Se desconoce (razón formal)</option>
+        </select></label>
+        <label>Fecha (si se conoce)<input type="text" id="extFecha" placeholder="Ej. hace 2 meses / mar 2026"></label>
+        <label>¿Responsable conocido?<select id="extRespKnown">
+          <option>Conocido (indícalo abajo)</option><option selected>Desconocido (razón formal)</option>
+        </select></label>
+        <label>Sistema intervenido<select id="extSistema">
+          <option>El mismo sistema de la falla actual</option><option>Otro sistema</option><option>No se sabe con precisión</option>
+        </select></label>
+        <label>Síntoma o motivo<input type="text" placeholder="Ej. rechinaba al frenar"></label>
+        <label>Trabajo realizado<input type="text" placeholder="Ej. cambio de balatas"></label>
+        <label>Taller / mecánico / persona<input type="text" placeholder="Nombre o 'no identificado'"></label>
+        <label>Refacciones instaladas<input type="text" placeholder="Si se conocen"></label>
+        <label>Marca de la refacción<input type="text" placeholder="Si la conoce"></label>
+        <label>Kilometraje aproximado<input type="text" placeholder="Ej. ~76,000 km"></label>
+        <label>Evidencia disponible<select><option>Ninguna</option><option>Factura o nota</option><option>Fotografía</option><option>Mensaje/chat</option><option>Pieza retirada</option></select></label>
+        <label>¿El problema actual inició antes o después?<select><option>Después de esa intervención</option><option>Antes de esa intervención</option><option>No se sabe</option></select></label>
+        <label>Nivel de certeza<select id="extCerteza">
+          <option value="confirmado">Confirmado con documento o evidencia</option>
+          <option value="cliente" selected>Declarado por el cliente</option>
+          <option value="tercero">Declarado por un tercero</option>
+          <option value="parcial">Parcialmente conocido</option>
+          <option value="desconocido">Desconocido</option>
+        </select></label>
+        <label>Observaciones del cliente<input type="text" placeholder="Comentarios adicionales"></label>
+      </div>
+    </div>
+    <div class="rule-banner soft">⚖️ "Una intervención externa declarada <b>aporta contexto al diagnóstico</b>, pero no demuestra por sí sola la causa de una falla."</div>
+  </div>
   <button class="btn btn-red btn-lg" data-go="s7" id="sendRequest">Enviar solicitud ✓</button>
+  <p class="disclaim" id="extGateNote"></p>
 </section>
 
 <!-- ============ 7 · PRESUPUESTO ============ -->
@@ -285,6 +352,7 @@
         <h3>📖 Historial del vehículo</h3>
         <div id="histList"></div>
         <small class="sim-note">Expediente portable: útil para reventa y seguros.</small>
+        <button class="btn btn-navy" data-go="s16" style="margin-top:10px">Ver Expediente Técnico completo →</button>
       </div>
       <div class="card nps-mini">
         <h3>¿Cómo quedó todo?</h3>
@@ -292,6 +360,15 @@
         <button class="btn btn-navy" data-role-go="admin" data-go="s14">Responder evaluación →</button>
       </div>
     </div>
+  </div>
+  <div class="card step11-card">
+    <div class="step11-kicker">PASO FINAL DE TODA ORDEN</div>
+    <h3>11 · Consolidación del Expediente Técnico</h3>
+    <p>La orden termina, pero el expediente permanece. Al cerrar correctamente, esta información
+    <b>validada</b> se incorpora al Expediente Técnico permanente del vehículo:</p>
+    <ul class="check-list two-col-list" id="consolidateList"></ul>
+    <button class="btn btn-red btn-lg" id="consolidateBtn">Cerrar orden y consolidar expediente →</button>
+    <div class="notice hidden" id="consolidateDone">✅ Orden cerrada. El expediente del vehículo fue actualizado con esta orden.</div>
   </div>
 </section>
 
@@ -329,7 +406,11 @@
   <div class="card">
     <div class="trace-head">
       <h3>Bitácora de la orden activa (OT-2026-0512)</h3>
-      <button class="btn btn-mini" data-go="s15">Ver islas de trabajo →</button>
+      <div>
+        <button class="btn btn-mini" data-go="s15">Islas de trabajo →</button>
+        <button class="btn btn-mini" data-go="s17">Control de integridad →</button>
+        <button class="btn btn-mini" data-go="s16">Expediente del vehículo →</button>
+      </div>
     </div>
     <div class="trace-log" id="traceLogTaller"></div>
   </div>
@@ -364,7 +445,8 @@
 <section class="screen" id="s12">
   <h2>Administración de la red — Certificación</h2>
   <p class="sub">Talleres de la zona piloto · corte al 13 de julio</p>
-  <div class="notice">🛡️ Los talleres <b>en proceso</b> o <b>en adecuación</b> no aparecen al cliente hasta cumplir los mínimos operativos de la red: la red protege la calidad antes de dar visibilidad.</div>
+  <div class="notice">🛡️ Los talleres <b>en proceso</b> o <b>en adecuación</b> no aparecen al cliente hasta cumplir los mínimos operativos de la red: la red protege la calidad antes de dar visibilidad.
+  <button class="btn btn-mini" data-go="s16" style="margin-left:8px">Consultar expediente de un vehículo →</button></div>
   <div class="stat-row">
     <div class="stat"><b>24</b><span>certificados activos</span></div>
     <div class="stat"><b>7</b><span>en proceso (provisional)</span></div>
@@ -455,25 +537,37 @@
     <div class="stat"><b>+42</b><span>NPS de la red</span></div>
     <div class="stat"><b>4.3/5</b><span>calidad-precio</span></div>
   </div>
+  <div class="rule-banner soft">⚖️ "La clasificación automática <b>orienta la atención; no sustituye la revisión humana</b>." Cada caso muestra qué reglas se activaron y permite reclasificación manual.</div>
   <div class="two-col">
     <div class="card">
-      <h3>Bandeja de entrada</h3>
-      <div class="fb-item"><span class="pill bad">QUEJA</span><div><b>OT-0498 · MecaExpress</b><p>"Me entregaron 2 horas tarde y nadie avisó."</p><small>Estado: respuesta del taller (SLA 24 h) · abierta hace 5 h</small></div></div>
-      <div class="fb-item"><span class="pill risk">RIESGO</span><div><b>OT-0471 · AutoServicio Norte</b><p>"Me cobraron un cambio de bujías que nunca autoricé."</p><small>⚡ Escalada al administrador · caso #C-118 · en revisión</small></div></div>
-      <div class="fb-item"><span class="pill sug">SUGERENCIA</span><div><b>App · cliente frecuente</b><p>"Estaría bien poder agendar desde el historial del carro."</p><small>Enviada a backlog de producto</small></div></div>
-      <div class="fb-item"><span class="pill fel">FELICITACIÓN</span><div><b>OT-0512 · Hermanos Ruiz</b><p>"Primera vez que un taller me manda video del problema. Excelente."</p><small>Compartida con el taller ✓</small></div></div>
+      <h3>Bandeja de entrada (clasificada por el motor de riesgos)</h3>
+      <div id="fbInbox"><!-- render JS con evaluateCustomerFeedback --></div>
     </div>
     <div>
-      <div class="card">
+      <div class="card" id="surveyCard">
         <h3>Encuesta post-servicio (vista del cliente)</h3>
-        <div class="q-block"><label class="lbl">¿El presupuesto coincidió con lo autorizado?</label>
-          <div class="slot-row"><button class="slot active">Sí</button><button class="slot">Cambios explicados</button><button class="slot">Cambios sin explicar</button></div></div>
-        <div class="q-block"><label class="lbl">Relación calidad-precio</label>
-          <div class="slot-row stars" id="cpStars"><button class="slot">1</button><button class="slot">2</button><button class="slot">3</button><button class="slot active">4</button><button class="slot">5</button></div></div>
-        <div class="q-block"><label class="lbl">Del 0 al 10, ¿recomendarías este taller?</label>
-          <div class="nps-row" id="npsRow"></div>
-          <small id="npsLabel" class="nps-label">9 · Promotor 🎉</small></div>
-        <button class="btn btn-navy" id="sendSurvey">Enviar evaluación ✓</button>
+        <div class="sv-controls">
+          <div class="q-block"><label class="lbl">¿El presupuesto coincidió con lo autorizado?</label>
+            <div class="slot-row" id="svBudget">
+              <button class="slot active" data-v="coincide">Sí</button>
+              <button class="slot" data-v="cambios_explicados">Cambios explicados</button>
+              <button class="slot" data-v="cambios_sin_explicar">Cambios sin explicar</button>
+            </div></div>
+          <div class="q-block"><label class="lbl">Relación calidad-precio</label>
+            <div class="slot-row stars" id="cpStars"><button class="slot">1</button><button class="slot">2</button><button class="slot">3</button><button class="slot active">4</button><button class="slot">5</button></div></div>
+          <div class="q-block"><label class="lbl">Del 0 al 10, ¿recomendarías este taller a otra persona?</label>
+            <div class="nps-row" id="npsRow"></div>
+            <small id="npsLabel" class="nps-label"></small></div>
+          <div class="q-block"><label class="lbl">¿Hubo algún inconveniente?</label>
+            <div class="sv-incidents" id="svIncidents"></div></div>
+          <div class="q-block hidden" id="svMore">
+            <label class="lbl">Cuéntanos qué ocurrió o qué fue lo mejor del servicio</label>
+            <textarea id="svComment" rows="2" placeholder="Comentario opcional…"></textarea>
+          </div>
+          <button class="attach add hidden" id="svAddComment">＋ Agregar comentario (opcional)</button>
+          <button class="btn btn-navy" id="sendSurvey">Enviar evaluación ✓</button>
+        </div>
+        <div class="sv-result hidden" id="svResult"></div>
       </div>
       <div class="card">
         <h3>Flujo de atención de quejas</h3>
@@ -481,6 +575,158 @@
         <small><b>Esto no es un buzón:</b> cada queja genera revisión, respuesta, solución y aprendizaje para mejorar la red — en el taller, en el proceso o en el checklist de auditoría.</small>
       </div>
     </div>
+  </div>
+  <div class="card">
+    <h3>Motor de riesgos · clasifica una opinión (demo)</h3>
+    <div class="two-col">
+      <div>
+        <div class="q-block"><label class="lbl">¿El presupuesto coincidió con lo autorizado?</label>
+          <div class="slot-row" id="clfBudget">
+            <button class="slot active" data-v="coincide">Sí</button>
+            <button class="slot" data-v="cambios_explicados">Cambios explicados</button>
+            <button class="slot" data-v="cambios_sin_explicar">Cambios sin explicar</button>
+          </div></div>
+        <div class="q-block"><label class="lbl">Calidad-precio (1–5)</label>
+          <div class="slot-row stars" id="clfCp"><button class="slot">1</button><button class="slot">2</button><button class="slot">3</button><button class="slot active">4</button><button class="slot">5</button></div></div>
+        <div class="q-block"><label class="lbl">NPS (0–10)</label>
+          <div class="nps-row" id="clfNps"></div></div>
+        <div class="q-block"><label class="lbl">Comentario abierto del cliente</label>
+          <textarea id="clfComment" rows="2" placeholder="Ej. me cobraron algo que no autoricé / el carro quedó excelente…"></textarea></div>
+        <div class="q-block clf-flags" id="clfFlags">
+          <label><input type="checkbox" data-f="retraso"> Retraso relevante</label>
+          <label><input type="checkbox" data-f="fallaRepetida"> Misma falla repetida</label>
+          <label><input type="checkbox" data-f="evidenciaNoEntregada"> Evidencia prometida no entregada</label>
+          <label><input type="checkbox" data-f="garantiaRechazada"> Garantía rechazada sin dictamen</label>
+          <label><input type="checkbox" data-f="condicionPeor"> Vehículo entregado aparentemente peor</label>
+        </div>
+        <button class="btn btn-navy" id="clfRun">Clasificar caso →</button>
+      </div>
+      <div>
+        <div class="card clf-result" id="clfResult"><h3>¿Por qué se clasificó así?</h3>
+          <p class="disclaim">Configura el caso y presiona "Clasificar". Verás la categoría, las reglas activadas y la acción recomendada.</p></div>
+        <div class="card" id="caseRecord"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 18 · CATÁLOGO DE VEHÍCULOS (ADMIN) ============ -->
+<section class="screen" id="s18">
+  <h2>Catálogo y frecuencia de vehículos</h2>
+  <p class="sub">Familias por rangos de años · la prioridad regional es <b>editable y demostrativa</b>, no una
+  estadística definitiva: se calibra con René y con las búsquedas reales del piloto.</p>
+  <div class="stat-row" id="catStats"></div>
+  <div class="two-col">
+    <div class="card"><h3>Vehículos más seleccionados (demo + sesión)</h3><div id="catTop"></div></div>
+    <div class="card"><h3>Marcas frecuentes</h3><div id="catBrands"></div></div>
+  </div>
+  <div class="two-col">
+    <div class="card"><h3>Búsquedas sin resultado</h3><div id="catMisses"></div></div>
+    <div class="card"><h3>Capturas manuales pendientes de normalizar</h3><div id="catManual"></div></div>
+  </div>
+  <div class="card">
+    <h3>Prioridad regional editable (muestra) y modelos a validar con René</h3>
+    <div id="catPriority"></div>
+  </div>
+</section>
+
+<!-- ============ 16 · EXPEDIENTE TÉCNICO DEL VEHÍCULO ============ -->
+<section class="screen" id="s16">
+  <div class="panel-head">
+    <div>
+      <h2>Expediente Técnico del Vehículo <span class="folio" id="dsFolio">ARP-VEH</span></h2>
+      <p class="sub" id="dsSub">—</p>
+    </div>
+    <div class="panel-kpis" id="dsKpis"></div>
+  </div>
+  <div class="card tag-legend">
+    <b>Cómo leer este expediente:</b>
+    <span class="tag tag-arp">Servicio AutoRed Pro</span>
+    <span class="tag tag-ext">Intervención externa declarada</span>
+    <span class="tag tag-cli">Dato proporcionado por el cliente</span>
+    <span class="tag tag-ver">Verificado con evidencia</span>
+    <span class="tag tag-unk">Dato desconocido</span>
+    <span class="tag tag-pen">Pendiente de confirmar</span>
+    <p class="disclaim">Un trabajo documentado por AutoRed Pro y algo mencionado de memoria por el cliente
+    <b>no tienen la misma confiabilidad</b>; las etiquetas conservan esa diferencia.</p>
+  </div>
+  <div class="two-col">
+    <div class="card">
+      <h3>Identificación</h3>
+      <table class="kv" id="dsIdent"></table>
+    </div>
+    <div class="card">
+      <h3>Continuidad y calidad (indicadores demostrativos)</h3>
+      <ul class="check-list" id="dsIndicators"></ul>
+      <div class="notice">💬 "Conocer el historial completo ayuda a diagnosticar mejor." Registrar servicios
+      externos permite conservar continuidad técnica aunque el vehículo haya sido atendido fuera de la red.</div>
+    </div>
+  </div>
+  <div class="card">
+    <h3>Línea de vida del vehículo</h3>
+    <div class="lifeline" id="lifeline"></div>
+  </div>
+  <div class="two-col">
+    <div class="card">
+      <h3>Recomendaciones pendientes y mantenimientos futuros</h3>
+      <ul class="check-list" id="dsRecs"></ul>
+    </div>
+    <div class="card">
+      <h3>Garantías y reaperturas</h3>
+      <div id="dsWarr"></div>
+    </div>
+  </div>
+  <div class="card">
+    <h3>Reapertura por garantía · evaluación con intervención externa (demo)</h3>
+    <div class="two-col">
+      <div>
+        <ul class="check-list" id="warrQuestions"></ul>
+      </div>
+      <div>
+        <label class="lbl">Estado de la evaluación</label>
+        <select id="warrState" class="warr-select"></select>
+        <div class="notice" id="warrStateNote"></div>
+        <div class="rule-banner soft">⚖️ "La procedencia de la garantía se determina mediante <b>revisión técnica y
+        evidencia</b>, no únicamente por la existencia de un servicio externo." La garantía nunca se cancela
+        en automático.</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <h3>Cliente y fidelización (sin juicios, solo continuidad)</h3>
+    <div class="two-col">
+      <div>
+        <table class="kv" id="dsClient"></table>
+      </div>
+      <ul class="check-list" id="dsClientVeh"></ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 17 · CONTROL DE INTEGRIDAD ============ -->
+<section class="screen" id="s17">
+  <div class="panel-head">
+    <div>
+      <h2>Control de integridad de la orden <span class="folio">OT-2026-0512</span></h2>
+      <p class="sub">Puertas de calidad: el sistema no permite avanzar de etapa con datos indispensables
+      faltantes. Un dato puede ser <b>desconocido con razón formal</b>, pero nunca simplemente vacío.</p>
+    </div>
+    <div class="panel-kpis" id="gateKpis"></div>
+  </div>
+  <div class="notice" id="gateInconsistency"></div>
+  <div id="gatesList"></div>
+  <div class="card">
+    <h3>Estados de integridad</h3>
+    <div class="gate-states">
+      <span class="pill bad">Incompleto</span>
+      <span class="pill warn">Completo con pendientes justificados</span>
+      <span class="pill ok">Completo</span>
+      <span class="pill proc">Validado</span>
+      <span class="pill risk">Bloqueado por inconsistencia</span>
+    </div>
+    <p class="disclaim">Categorías formales para información no disponible: <b>Se desconoce · Cliente no
+    respondió · Cliente no recuerda · No aplica · Pendiente de confirmar · No fue posible obtener el dato.</b>
+    Una ausencia de información nunca se convierte en una afirmación.</p>
   </div>
 </section>
 
@@ -490,6 +736,8 @@
 <!-- ============ MODAL DE ACCESO DEMOSTRATIVO ============ -->
 <div class="login-overlay hidden" id="loginOverlay">
   <div class="login-box">
+    <img class="login-logo" src="brand/logo-horizontal.png" alt="AutoRed Pro"
+         onerror="this.classList.add('hidden')">
     <div id="loginStep1">
       <div class="login-head">🔒 Acceso demostrativo</div>
       <p class="login-sub">Las áreas de <b>Taller</b> y <b>Administrador</b> son parte de la demostración
@@ -515,8 +763,15 @@
   </div>
 </div>
 
+<div class="fix-bar hidden" id="fixBar">
+  <div><b id="fixBarField">—</b><span id="fixBarReason"></span></div>
+  <button class="btn btn-mini" id="fixBarBack">↩ Volver al Control de integridad</button>
+  <button class="fix-bar-close" id="fixBarClose">✕</button>
+</div>
+
 <footer class="foot">AutoRed Pro · Prototipo demostrativo · Datos simulados · No representa una operación comercial activa.</footer>
 
+<script src="vehicle-catalog.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
